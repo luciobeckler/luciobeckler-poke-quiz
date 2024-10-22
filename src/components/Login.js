@@ -8,8 +8,50 @@ import {
 } from "@mui/material";
 import React from "react";
 import Center from "./Center";
+import useForm from "../hooks/useForm";
 
 export default function Login() {
+
+  const getFreshModelObject = () => ({
+    name: "",
+    email: "",
+  })
+  
+  const {
+    values, 
+    setValues, 
+    errors, 
+    setErrors, 
+    handleInputChange
+  } = useForm(getFreshModelObject);
+
+  const login = (e) => {
+    e.preventDefault();
+    
+    if(validate().size === 0)
+      console.log(values);
+    else {
+      console.log(validate().email);
+      console.log(validate().name);
+    }
+  }
+
+  const validate = () => {
+    let temp = {};
+    // Regulars expressions to validade email and name
+    const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const NAME_REGEX = /^[A-Za-zÀ-ÖØ-öø-ÿ ]{2,50}$/;
+
+    temp.email = EMAIL_REGEX.test(values.email) ? "" : "E-mail is not valid";
+    temp.name = NAME_REGEX.test(values.name) ? "" : "Name is not valid";
+
+    setErrors(temp);
+
+    const isValid = Object.values(temp).every((x) => x === "");
+
+    return isValid;
+  }
+
   return (
     <Center>
       <Card sx={{ width: 400 }}>
@@ -26,9 +68,23 @@ export default function Login() {
               },
             }}
           >
-            <form noValidate>
-              <TextField label="Email" name="email" variant="outlined" />
-              <TextField label="Name" name="name" variant="outlined" />
+            <form noValidate onSubmit={login}>
+              <TextField 
+                label="Email" 
+                name="email" 
+                value={values.email} 
+                onChange={handleInputChange}
+                variant="outlined"
+                {...(errors.email && { error: true, helperText: errors.email })}
+              />
+              <TextField 
+                label="Name" 
+                name="name"  
+                value={values.name} 
+                onChange={handleInputChange}
+                variant="outlined" 
+                {...(errors.name && { error: true, helperText: errors.name })}
+              />
               <Button
                 type="submit"
                 size="large"
