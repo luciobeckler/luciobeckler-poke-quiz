@@ -9,8 +9,14 @@ import {
 import React from "react";
 import Center from "./Center";
 import useForm from "../hooks/useForm";
+import { creatAPIEndpoint, END_POINTS } from "../api";
+import useStateContext from "../hooks/useStateContent";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+
+  const {context, setContext} = useStateContext();
+  const navigate = useNavigate();
 
   const getFreshModelObject = () => ({
     name: "",
@@ -28,9 +34,17 @@ export default function Login() {
   const login = (e) => {
     e.preventDefault();
     
-    if(validate().size === 0)
-      console.log(values);
-    else {
+    if(validate())
+      creatAPIEndpoint(END_POINTS.participant)
+      .create(values)
+      .then(res=> {
+        setContext({participantId: res.data.participantId})
+        navigate("/quiz");
+        console.log(res.data);
+      })
+      .catch(error => console.log(error));
+
+      else {
       console.log(validate().email);
       console.log(validate().name);
     }
