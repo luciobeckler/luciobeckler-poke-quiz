@@ -36,18 +36,17 @@ export default function Login() {
     
     if(validate())
       creatAPIEndpoint(END_POINTS.participant)
-      .create(values)
+      .post(values)
       .then(res=> {
-        setContext({participantId: res.data.participantId})
+        setContext({participantId: res.data.id})
         navigate("/quiz");
+        console.warn("res.data")
         console.log(res.data);
+
+        console.warn("context")
+        console.log(context)
       })
       .catch(error => console.log(error));
-
-      else {
-      console.log(validate().email);
-      console.log(validate().name);
-    }
   }
 
   const validate = () => {
@@ -58,11 +57,9 @@ export default function Login() {
 
     temp.email = EMAIL_REGEX.test(values.email) ? "" : "E-mail is not valid";
     temp.name = NAME_REGEX.test(values.name) ? "" : "Name is not valid";
-
     setErrors(temp);
 
     const isValid = Object.values(temp).every((x) => x === "");
-
     return isValid;
   }
 
