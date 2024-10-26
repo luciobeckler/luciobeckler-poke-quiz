@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { creatAPIEndpoint, END_POINTS } from '../api'
-import { Box, Card, CardContent, CardHeader, LinearProgress, List, ListItemButton, Typography } from '@mui/material'
+import { BASE_URL, creatAPIEndpoint, END_POINTS } from '../api'
+import { Box, Card, CardContent, CardHeader, CardMedia, LinearProgress, List, ListItemButton, Typography } from '@mui/material'
 import { formatTimer } from '../helper'
 import useStateContext from '../hooks/useStateContent'
+import { useNavigate } from 'react-router-dom'
 
 export default function Quiz() {
-  //debugger
+  const navigate = useNavigate()
   const [qst, setQst] = useState([])
   const [indexQst, setIndexQst] = useState(0)
   const [timeTaken, setTimeTaken] = useState(0)
@@ -20,6 +21,11 @@ export default function Quiz() {
   }
 
   useEffect(() => {
+    setContext({
+      timeTaken: 0,
+      selectedOptions: []
+    })
+    
     creatAPIEndpoint(END_POINTS.question)
     .get() 
     .then(res => {
@@ -45,11 +51,9 @@ export default function Quiz() {
       setContext({
         selectedOptions: [...temp],
         timeTaken
-    })
-    //navigate to result
+      })
+      navigate("/result")
     }
-      
-
   }
 
   return (
@@ -64,6 +68,13 @@ export default function Quiz() {
       <Box>
         <LinearProgress variant='determinate' value={(indexQst + 1)*100 / 5} />
       </Box>
+      {qst[indexQst].imageName != null ?
+        <CardMedia 
+          component="img"
+          image= {BASE_URL + 'images/' + qst[indexQst].imageName}
+          sx={{width:'auto', m: '10px auto'}}
+        /> : null
+      }
       <CardContent>
         <Typography variant='h6'>
           {qst[indexQst].tittle}

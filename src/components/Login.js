@@ -6,7 +6,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import Center from "./Center";
 import useForm from "../hooks/useForm";
 import { creatAPIEndpoint, END_POINTS } from "../api";
@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Login() {
 
-  const {context, setContext} = useStateContext();
+  const {context, setContext, resetContext} = useStateContext();
   const navigate = useNavigate();
 
   const getFreshModelObject = () => ({
@@ -30,6 +30,11 @@ export default function Login() {
     setErrors, 
     handleInputChange
   } = useForm(getFreshModelObject);
+
+  useEffect(() => {
+    resetContext()
+  }, [])
+  
 
   const login = (e) => {
     e.preventDefault();
