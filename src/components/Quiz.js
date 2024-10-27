@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { BASE_URL, creatAPIEndpoint, END_POINTS } from '../api'
+import { BASE_URL, createAPIEndpoint, END_POINTS } from '../api'
 import { Box, Card, CardContent, CardHeader, CardMedia, LinearProgress, List, ListItemButton, Typography } from '@mui/material'
 import { formatTimer } from '../helper'
 import useStateContext from '../hooks/useStateContent'
@@ -26,7 +26,7 @@ export default function Quiz() {
       selectedOptions: []
     })
     
-    creatAPIEndpoint(END_POINTS.question)
+    createAPIEndpoint(END_POINTS.question)
     .get() 
     .then(res => {
       setQst(res.data)
@@ -80,7 +80,7 @@ export default function Quiz() {
           {qst[indexQst].tittle}
           <List>
             {qst[indexQst].options.map((optionTittle, indexOption) => 
-              <ListItemButton key={indexOption} onClick={() => updateAnswer(qst[indexQst].Id, indexOption)}>
+              <ListItemButton key={indexOption} onClick={() => updateAnswer(qst[indexQst].id, indexOption)}>
                 <div>
                   <b>{String.fromCharCode(65 + indexOption) + " . "}</b> {optionTittle}
                 </div>

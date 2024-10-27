@@ -9,7 +9,7 @@ import {
 import React, { useEffect } from "react";
 import Center from "./Center";
 import useForm from "../hooks/useForm";
-import { creatAPIEndpoint, END_POINTS } from "../api";
+import { createAPIEndpoint, END_POINTS } from "../api";
 import useStateContext from "../hooks/useStateContent";
 import { useNavigate } from "react-router-dom";
 
@@ -40,16 +40,11 @@ export default function Login() {
     e.preventDefault();
     
     if(validate())
-      creatAPIEndpoint(END_POINTS.participant)
+      createAPIEndpoint(END_POINTS.participant)
       .post(values)
       .then(res=> {
         setContext({participantId: res.data.id})
         navigate("/quiz");
-        console.warn("res.data")
-        console.log(res.data);
-
-        console.warn("context")
-        console.log(context)
       })
       .catch(error => console.log(error));
   }
