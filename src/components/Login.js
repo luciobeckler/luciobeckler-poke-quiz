@@ -3,6 +3,7 @@ import {
   Button,
   Card,
   CardContent,
+  CardMedia,
   TextField,
   Typography,
 } from "@mui/material";
@@ -12,6 +13,7 @@ import useForm from "../hooks/useForm";
 import { createAPIEndpoint, END_POINTS } from "../api";
 import useStateContext from "../hooks/useStateContent";
 import { useNavigate } from "react-router-dom";
+import { red } from "@mui/material/colors";
 
 export default function Login() {
 
@@ -67,10 +69,19 @@ export default function Login() {
     <Center>
       <Card sx={{ width: 400 }}>
         <CardContent sx={{ textAlign: "center" }}>
-          <Typography variant="h3" sx={{ marginY: 3 }}>
-            {" "}
-            Quiz App{" "}
-          </Typography>
+          <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 2 }}>
+            <CardMedia
+              component="img"
+              sx={{ width: 100 }}  // Diminui o tamanho da imagem, caso necessário
+              image="./pokebola.png"
+            />
+            <Typography variant="h3" sx={{ marginY: 3, color:red[900]}}>
+              Poke-Quiz
+              <Typography variant="h3" sx={{ marginY: 3, color: 'white'}}>
+              App
+            </Typography>
+            </Typography>
+          </Box>
           <Box
             sx={{
               "& .MuiTextField-root": {
@@ -80,28 +91,23 @@ export default function Login() {
             }}
           >
             <form noValidate onSubmit={login}>
-              <TextField 
-                label="Email" 
-                name="email" 
-                value={values.email} 
+              <TextField
+                label="Email"
+                name="email"
+                value={values.email}
                 onChange={handleInputChange}
                 variant="outlined"
                 {...(errors.email && { error: true, helperText: errors.email })}
               />
-              <TextField 
-                label="Name" 
-                name="name"  
-                value={values.name} 
+              <TextField
+                label="Name"
+                name="name"
+                value={values.name}
                 onChange={handleInputChange}
-                variant="outlined" 
+                variant="outlined"
                 {...(errors.name && { error: true, helperText: errors.name })}
               />
-              <Button
-                type="submit"
-                size="large"
-                variant="contained"
-                sx={{ width: "90%" }}
-              >
+              <Button type="submit" size="large" variant="contained" sx={{ width: "90%" }}>
                 Start
               </Button>
             </form>
@@ -109,5 +115,5 @@ export default function Login() {
         </CardContent>
       </Card>
     </Center>
-  );
+  );  
 }
