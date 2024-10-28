@@ -4,16 +4,18 @@ import useStateContext from '../hooks/useStateContent';
 import { Alert, Box, Button, Card, CardContent, CardMedia, Typography } from '@mui/material';
 import { formatTimer } from '../helper';
 import { useNavigate } from 'react-router-dom';
+import {green} from '@mui/material/colors'
+import Answers from './Answers';
 
 export default function Result() {
-  const {context, setContext, resetContext} = useStateContext()
+  const {context, setContext} = useStateContext()
   const [score, setScore] = useState(0)
   const [qnAnswers, setQnAnswers] = useState([])
   const[showAlert, setShowAlert] = useState(false)
   const navigate = useNavigate()
   
-  let answers;  
-
+  let answers;
+  
   useEffect(() => {
     const ids = context.selectedOptions.map(x => x.qstId);
     createAPIEndpoint(END_POINTS.getAnswers)
@@ -56,7 +58,7 @@ export default function Result() {
       timeTaken: context.timeTaken
     })
     .then(res => {
-      console.log(res.data)
+      console.log(qnAnswers)
       setShowAlert(true)
       setTimeout(()=>{
         setShowAlert(false)
@@ -67,13 +69,14 @@ export default function Result() {
   }
 
   return (
+    <>
     <Card sx={{mt: 5, display:'flex', width: '100%', maxWidth:640, mx: 'auto'}}>
       <Box sx={{display:'flex', flexDirection: 'column', flexGrow: 1}}>
         <CardContent sx={{flex: '1 0 auto', textAlign: 'center'}}>
           <Typography variant='h4'>Congratulations!</Typography>
           <Typography variant='h6'>YOUR SCORE</Typography>
           <Typography variant='h5' sx={{fontWeight: 600}}>
-            <Typography variant='span'>
+            <Typography variant='span' color={green[500]}>
               {score}
             </Typography>/5
           </Typography>
@@ -112,5 +115,7 @@ export default function Result() {
       image='./result.png'
       />
     </Card>
+    <Answers qnAnswers = {qnAnswers}></Answers>
+    </>
   )
 }
