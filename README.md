@@ -1,70 +1,77 @@
-# Getting Started with Create React App
+# PokeQuiz.APP
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Aplicação front-end em React para um Quiz, utilizando React Router, Axios e Material UI.
 
-## Available Scripts
+## Índice
 
-In the project directory, you can run:
+- [Introdução](#introdução)
+- [Requisitos](#requisitos)
+- [Configuração](#configuração)
+- [Estrutura do Projeto](#estrutura-do-projeto)
+- [Telas do projeto](#telas-do-projeto)
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Introdução
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Esta aplicação front-end foi desenvolvida com React para interagir com a API de Quiz disponível [neste link](https://github.com/luciobeckler/poke-quiz-api). A aplicação permite aos usuários participar de quizzes, visualizar perguntas e enviar suas respostas, utilizando Axios para chamadas à API e Material UI para a interface.
 
-### `npm test`
+### Tecnologias Utilizadas
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- React v18.3.1
+- React Router v6.27 
+- Axios v1.7.7
+- Material UI v6.1.4
 
-### `npm run build`
+## Requisitos
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Node.js**: [link para instalação](https://nodejs.org/en/)
+- **npm**: O gerenciador de pacotes do Node (já incluído com o Node.js)
+- **Editor de Código**: Recomendado [Visual Studio Code](https://code.visualstudio.com/)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Configuração
+### Passo 1: Clonar o Repositório
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+git clone https://github.com/luciobeckler/poke-quiz-app.git
+cd poke-quiz-app
+```
 
-### `npm run eject`
+### Passo 2: Instalar Dependências
+```bash
+npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Passo 3: Rodar a Aplicação
+```bash
+npm start
+```
+A aplicação estará disponível em http://localhost:3000.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Estrutura do Projeto
+- src: Contém todos os componentes da aplicação.
+  - components: Componentes reutilizáveis da interface (será implementado uma melhor modularização dos componentes e páginas).
+  - pages: Páginas da aplicação (será implementado uma melhor modularização dos componentes e páginas).
+  - services: Arquivo para interações com a API usando Axios.
+  - hooks: Hooks globais utilziados na aplicação
+  - helper: funções globais utilziadas na aplicação
+  - App.js: Componente principal que define as rotas da aplicação.
+  - index.js: Ponto de entrada da aplicação.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Telas do projeto
+### Login:
+![image](https://github.com/user-attachments/assets/2b408779-6d26-412a-970d-dbf3ba0aac1f)
+![image](https://github.com/user-attachments/assets/b09387d1-24aa-4c36-9138-b0dffcb83f9f)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Quiz:
+![image](https://github.com/user-attachments/assets/fc02170c-12d0-4421-9b0d-3b9278152d80)
 
-## Learn More
+### Result:
+![image](https://github.com/user-attachments/assets/73ecdc8e-9ceb-48ff-a701-036da1c71576)
+![image](https://github.com/user-attachments/assets/e235a686-d2b6-48d1-8344-0748b115f35e)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
